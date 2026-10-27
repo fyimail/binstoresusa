@@ -1,0 +1,32 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import stores from "../../data/stores.json";
+
+export function getStaticPaths() {
+  const states = [...new Map(stores.map((s) => [s.stateSlug, s.state]))];
+  return states.map(([slug, name]) => ({ params: { state: slug }, props: { stateName: name } }));
+}
+
+const { stateName } = Astro.props;
+const stateStores = stores.filter((s) => s.stateSlug === Astro.params.state);
+const cities = [...new Map(stateStores.map((s) => [s.citySlug, { city: s.city, slug: s.citySlug, count: stateStores.filter((x) => x.citySlug === s.citySlug).length }])).values()].sort((a, b) => a.city.localeCompare(b.city));
+---
+<Layout title={`Bin Stores in ${stateName} - Bin Stores USA`} description={`A links directory of bin stores in ${stateName}. Browse bin stores by city, with store names, addresses, and links to public listings.`}>
+  <p><a href="/">Home</a></p>
+  <h1>Bin Stores in {stateName}</h1>
+  <p class="lead">{stateStores.length} bin stores listed in {stateName}, across {cities.length} {cities.length === 1 ? "city" : "cities"}. Pick a city to see the stores listed there.</p>
+  <ul class="grid">
+    {cities.map((c) => (
+      <li><a href={`/${Astro.params.state}/${c.slug}/`}>{c.city} Bin Stores</a><br /><span class="meta">{c.count} {c.count === 1 ? "store" : "stores"} listed</span></li>
+    ))}
+  </ul>
+  <h2>All {stateName} bin stores</h2>
+  {stateStores.map((s) => (
+    <div class="store">
+      <h3>{s.name}</h3>
+      <p>{s.address}</p>
+      <p><a href={s.link} rel="nofollow">View public listing</a></p>
+      <p class="meta">Source: {s.source}, checked {s.checked}</p>
+    </div>
+  ))}
+</Layout>
