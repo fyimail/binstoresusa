@@ -1,0 +1,65 @@
+---
+interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📦</text></svg>" />
+    <style>
+      :root { color-scheme: light; }
+      * { box-sizing: border-box; }
+      body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: #1c2733; background: #f7f5ef; line-height: 1.6; }
+      a { color: #0b5cad; }
+      header { background: #123c5b; color: #fff; }
+      header .wrap { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; align-items: baseline; justify-content: space-between; }
+      header a { color: #fff; text-decoration: none; }
+      header nav a { margin-left: 1rem; font-size: 0.95rem; }
+      header nav a:first-child { margin-left: 0; }
+      .wrap { max-width: 900px; margin: 0 auto; padding: 1rem 1.25rem; }
+      main .wrap { background: #fff; border: 1px solid #e3ddd0; border-radius: 8px; margin-top: 1.25rem; margin-bottom: 1.25rem; padding: 1.5rem 1.25rem; }
+      h1 { font-size: 1.9rem; line-height: 1.25; margin: 0.25rem 0 0.75rem; }
+      h2 { font-size: 1.35rem; margin-top: 1.75rem; }
+      .lead { font-size: 1.1rem; }
+      .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.75rem; list-style: none; padding: 0; }
+      .grid li { border: 1px solid #e3ddd0; border-radius: 8px; padding: 0.75rem 1rem; background: #fdfcf9; }
+      .grid li a { font-weight: 600; }
+      .store { border: 1px solid #e3ddd0; border-radius: 8px; padding: 1rem; margin: 0.75rem 0; background: #fdfcf9; }
+      .store h2, .store h3 { margin: 0 0 0.25rem; font-size: 1.15rem; }
+      .store p { margin: 0.2rem 0; }
+      .meta { color: #5a6b7a; font-size: 0.9rem; }
+      .note { background: #eef4fa; border-left: 4px solid #0b5cad; padding: 0.75rem 1rem; border-radius: 0 8px 8px 0; }
+      footer { color: #5a6b7a; font-size: 0.9rem; padding-bottom: 2rem; }
+      footer a { color: #5a6b7a; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="wrap">
+        <a href="/"><strong>Bin Stores USA</strong></a>
+        <nav>
+          <a href="/">Home</a>
+          <a href="/about/">About</a>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <div class="wrap">
+        <slot />
+      </div>
+    </main>
+    <footer>
+      <div class="wrap">
+        <p>Bin Stores USA is a links directory. It lists store names, addresses, and links to public listings. It gives no shopping advice and it does not rate, check, or vouch for any store. Hours and prices change often, so check the store's own page before you go.</p>
+        <p><a href="/">Home</a> - <a href="/about/">About</a></p>
+      </div>
+    </footer>
+  </body>
+</html>
