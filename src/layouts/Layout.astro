@@ -1,4 +1,5 @@
 ---
+import Analytics from '@vercel/analytics/astro';
 interface Props {
   title: string;
   description: string;
@@ -13,6 +14,13 @@ const { title, description } = Astro.props;
     <title>{title}</title>
     <meta name="description" content={description} />
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2675915677267110" crossorigin="anonymous"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EB8G3XPGXV"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EB8G3XPGXV');
+    </script>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📦</text></svg>" />
     <style>
       :root { color-scheme: light; }
@@ -62,5 +70,19 @@ const { title, description } = Astro.props;
         <p><a href="/">Home</a> - <a href="/about/">About</a> - <a href="/privacy-policy/">Privacy Policy</a> - <a href="/contact/">Contact</a></p>
       </div>
     </footer>
+    <script>
+      document.addEventListener('click', function (event) {
+        var link = event.target.closest('a');
+        if (!link || !link.href || link.hostname === window.location.hostname) return;
+        if (typeof gtag !== 'function') return;
+        var store = link.closest('.store');
+        var name = store ? store.querySelector('h2, h3') : null;
+        gtag('event', 'outbound_click', {
+          store_name: name ? name.textContent.trim() : link.textContent.trim(),
+          link_url: link.href
+        });
+      });
+    </script>
+    <Analytics />
   </body>
 </html>
