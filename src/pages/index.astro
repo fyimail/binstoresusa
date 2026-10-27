@@ -1,0 +1,26 @@
+---
+import Layout from "../layouts/Layout.astro";
+import stores from "../data/stores.json";
+
+const states = [...new Map(stores.map((s) => [s.stateSlug, { name: s.state, slug: s.stateSlug }])).values()].sort((a, b) => a.name.localeCompare(b.name));
+const cities = [...new Map(stores.map((s) => [`${s.stateSlug}/${s.citySlug}`, { city: s.city, citySlug: s.citySlug, state: s.state, stateAbbr: s.stateAbbr, stateSlug: s.stateSlug, count: stores.filter((x) => x.citySlug === s.citySlug && x.stateSlug === s.stateSlug).length }])).values()].sort((a, b) => a.city.localeCompare(b.city));
+---
+<Layout title="Bin Stores Near Me - Bin Stores USA" description="A links directory of bin stores across the United States. Find bin stores by city and state, with store names, addresses, and links to public listings.">
+  <h1>Bin Stores Near Me</h1>
+  <p class="lead">A bin store is a shop that sells returned goods and overstock from big retailers. The goods sit in large bins, and the price per item often drops day by day through the week. This site lists bin stores across the United States, with a name, an address, and a link to a public listing for each store.</p>
+  <p class="note">This site lists links only. It gives no shopping advice and it does not rate, check, or vouch for any store. Hours and prices change often, so check the store's own page before you go.</p>
+  <h2>Browse bin stores by city</h2>
+  <ul class="grid">
+    {cities.map((c) => (
+      <li><a href={`/${c.stateSlug}/${c.citySlug}/`}>{c.city} Bin Stores, {c.stateAbbr}</a><br /><span class="meta">{c.count} {c.count === 1 ? "store" : "stores"} listed</span></li>
+    ))}
+  </ul>
+  <h2>Browse bin stores by state</h2>
+  <ul class="grid">
+    {states.map((s) => (
+      <li><a href={`/${s.slug}/`}>{s.name} Bin Stores</a><br /><span class="meta">{stores.filter((x) => x.stateSlug === s.slug).length} stores listed</span></li>
+    ))}
+  </ul>
+  <h2>What is a bin store?</h2>
+  <p>Bin stores buy pallets of returned goods, overstock, and shelf pulls from large retailers, then sell the items from bins in a warehouse style shop. Each item in a bin usually has one flat price for that day, and the price often falls as the week goes on. New goods arrive on restock days, so the stock in the bins changes from week to week. This site does not list prices or restock days, because they change often. Use the link on each listing to see the store's own page.</p>
+</Layout>
