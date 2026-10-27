@@ -1,0 +1,30 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import stores from "../../data/stores.json";
+
+export function getStaticPaths() {
+  const cities = new Map(stores.map((s) => [`${s.stateSlug}/${s.citySlug}`, s]));
+  return [...cities.values()].map((s) => ({ params: { state: s.stateSlug, city: s.citySlug }, props: { cityName: s.city, stateName: s.state, stateAbbr: s.stateAbbr } }));
+}
+
+const { cityName, stateName, stateAbbr } = Astro.props;
+const cityStores = stores.filter((s) => s.stateSlug === Astro.params.state && s.citySlug === Astro.params.city);
+const metroNote = cityName === "Dallas" ? "Stores listed here are in Dallas and nearby cities in the Dallas area. Each listing shows its own address." : cityName === "Los Angeles" ? "Stores listed here are in the Los Angeles area. Each listing shows its own address." : cityName === "Charlotte" ? "Stores listed here are in the Charlotte metro area. Each listing shows its own address." : cityName === "Atlanta" ? "Stores listed here are in the Atlanta metro area. Each listing shows its own address." : cityName === "Columbus" ? "Stores listed here are in Columbus and nearby Dublin, Ohio. Each listing shows its own address." : null;
+---
+<Layout title={`Bin Stores in ${cityName}, ${stateAbbr} - Bin Stores USA`} description={`Bin stores in ${cityName}, ${stateName}. ${cityStores.length} stores listed, with store names, addresses, and links to public listings.`}>
+  <p><a href="/">Home</a> - <a href={`/${Astro.params.state}/`}>{stateName} Bin Stores</a></p>
+  <h1>Bin Stores in {cityName}, {stateAbbr}</h1>
+  <p class="lead">{cityStores.length} bin {cityStores.length === 1 ? "store" : "stores"} listed in {cityName}, {stateName}.</p>
+  {metroNote && <p class="note">{metroNote}</p>}
+  {cityStores.map((s) => (
+    <div class="store">
+      <h2>{s.name}</h2>
+      <p>{s.address}</p>
+      <p><a href={s.link} rel="nofollow">View public listing</a></p>
+      <p class="meta">Source: {s.source}, checked {s.checked}</p>
+    </div>
+  ))}
+  <p class="note">Hours and prices change often and are not listed here. Check the store's own page through the link above before you go.</p>
+  <h2>More bin stores near {cityName}</h2>
+  <p><a href={`/${Astro.params.state}/`}>See all bin stores in {stateName}</a> or <a href="/">browse all cities</a>.</p>
+</Layout>
