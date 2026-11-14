@@ -13,7 +13,7 @@ const content = cityContent[`${Astro.params.state}/${Astro.params.city}`];
 const cityStores = stores.filter((s) => s.stateSlug === Astro.params.state && s.citySlug === Astro.params.city);
 const metroNote = cityName === "Dallas" ? "Stores listed here are in Dallas and nearby cities in the Dallas area. Each listing shows its own address." : cityName === "Los Angeles" ? "Stores listed here are in the Los Angeles area. Each listing shows its own address." : cityName === "Charlotte" ? "Stores listed here are in the Charlotte metro area. Each listing shows its own address." : cityName === "Atlanta" ? "Stores listed here are in the Atlanta metro area. Each listing shows its own address." : cityName === "Columbus" ? "Stores listed here are in Columbus and nearby Dublin, Ohio. Each listing shows its own address." : null;
 ---
-<Layout title={`Bin Stores in ${cityName}, ${stateAbbr} - Bin Stores USA`} description={`Bin stores in ${cityName}, ${stateName}. ${cityStores.length} stores listed, with store names, addresses, and links to public listings.`}>
+<Layout title={`${cityStores.length} Bin Stores in ${cityName}, ${stateAbbr} - Bin Stores USA`} description={`Bin stores in ${cityName}, ${stateName}. ${cityStores.length} stores listed, with store names, addresses, and links to public listings.`}>
   <p><a href="/">Home</a> - <a href={`/${Astro.params.state}/`}>{stateName} Bin Stores</a></p>
   <h1>Bin Stores in {cityName}, {stateAbbr}</h1>
   <p class="lead">{cityStores.length} bin {cityStores.length === 1 ? "store" : "stores"} listed in {cityName}, {stateName}.</p>
