@@ -75,6 +75,12 @@ export const cityContent = {
     local:
       "Two stores is a thin bench, and this page says so plainly rather than padding the list. Both listings were verified against public sources when this directory was built. If more Hialeah bin stores open, or if one of these closes, this list will change; a directory is only worth using if it admits what it does not cover. Current restock days and prices are on each store's own page, linked from the listings here.",
   },
+  "illinois/chicago": {
+    intro:
+      "Chicago's bin stores follow the same pattern as Dallas and Los Angeles in this directory: two sit inside the city itself, and three sit in the suburbs where warehouse space is cheaper. El Remate Discount Bin Store is on Diversey Avenue on the northwest side, and Black Friday Deals is on Cicero Avenue on the southwest side. The other three are in Cicero, Skokie, and Waukegan, each on a main commercial road. A Chicago shopper who only checks the two city stores misses the stronger half of the list, because the suburbs hold three of the five verified stores.",
+    local:
+      "The five stores here are independent shops, not branches of one chain, even where names sound familiar: a store with the same name, Black Friday Deals, also appears in this directory's Nashville listings. Each store buys its own loads, sets its own restock day, and posts its own prices and hours on its own page, linked from each listing. This directory does not print prices or hours, because both change too often to state reliably. Three stores that a rival directory still lists in Chicago, and one more in Chicago Ridge, were checked against their own social pages and found permanently closed, so they are not listed here.",
+  },
 };
 
 export const stateContent = {
@@ -96,4 +102,6 @@ export const stateContent = {
     "California coverage is the Los Angeles basin: four stores in Norwalk, Baldwin Park, Lynwood, and Los Angeles itself. That is a small slice of a very large state, and this page says so. Bin stores exist across California, but this directory lists only the stores it verified, and its checking so far reached the Los Angeles area. The pattern there is the pattern everywhere: the stores sit in the warehousing suburbs along the freight corridors, not in the expensive center.",
   florida:
     "Florida coverage is Hialeah only, two stores, Miami Bins and Hot Bins, in one of the Miami area's densest retail cities. Florida has bin stores well beyond Miami-Dade, and this directory has not verified them yet, so they are not listed. The rule here is simple: a short list that is checked beats a long list that is guessed at. Hialeah's two stores are real, verified, and linked; the rest of Florida is future work.",
+  illinois:
+    "Illinois coverage in this directory is the Chicago metro: five verified stores, two in Chicago itself and three in Cicero, Skokie, and Waukegan. That is a short list on purpose. Eleven Chicago-area stores were checked against their own pages before this page was built, and four were permanently closed on their own social pages, so a longer list built from a rival directory would have listed closed stores. The rest of Illinois has bin stores this directory has not verified yet, and unverified stores are not listed.",
 };
