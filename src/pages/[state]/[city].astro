@@ -1,7 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import stores from "../../data/stores.json";
-import { cityContent } from "../../data/content.js";
+import { cityContent, cityFaq } from "../../data/content.js";
 
 export function getStaticPaths() {
   const cities = new Map(stores.map((s) => [`${s.stateSlug}/${s.citySlug}`, s]));
@@ -10,6 +10,7 @@ export function getStaticPaths() {
 
 const { cityName, stateName, stateAbbr } = Astro.props;
 const content = cityContent[`${Astro.params.state}/${Astro.params.city}`];
+const faq = cityFaq[`${Astro.params.state}/${Astro.params.city}`];
 const cityStores = stores.filter((s) => s.stateSlug === Astro.params.state && s.citySlug === Astro.params.city);
 const metroNote = cityName === "Dallas" ? "Stores listed here are in Dallas and nearby cities in the Dallas area. Each listing shows its own address." : cityName === "Los Angeles" ? "Stores listed here are in the Los Angeles area. Each listing shows its own address." : cityName === "Charlotte" ? "Stores listed here are in the Charlotte metro area. Each listing shows its own address." : cityName === "Atlanta" ? "Stores listed here are in the Atlanta metro area. Each listing shows its own address." : cityName === "Columbus" ? "Stores listed here are in Columbus and nearby Dublin, Ohio. Each listing shows its own address." : cityName === "Chicago" ? "Stores listed here are in the Chicago metro area. Each listing shows its own address." : null;
 ---
@@ -30,6 +31,13 @@ const metroNote = cityName === "Dallas" ? "Stores listed here are in Dallas and 
   <p class="note">Hours and prices change often and are not listed here. Check the store's own page through the link above before you go.</p>
   {content && <h2>Bin stores in {cityName}, explained</h2>}
   {content && <p>{content.local}</p>}
+  {faq && <h2>Common questions about bin stores in {cityName}</h2>}
+  {faq && faq.map((f) => (
+    <div>
+      <h3>{f.q}</h3>
+      <p>{f.a}</p>
+    </div>
+  ))}
   <h2>New to bin stores?</h2>
   <p>Bin stores sell returned goods and overstock from big retailers, from large bins, at one flat price per item that usually drops day by day through the week. The <a href="/guide/">guide to how bin stores work</a> explains where the goods come from, what restock day means, and the honest catch: goods are usually sold as they are, and many sales are final.</p>
   <h2>More bin stores near {cityName}</h2>
