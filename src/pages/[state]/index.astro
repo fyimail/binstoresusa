@@ -13,7 +13,7 @@ const intro = stateContent[Astro.params.state];
 const stateStores = stores.filter((s) => s.stateSlug === Astro.params.state);
 const cities = [...new Map(stateStores.map((s) => [s.citySlug, { city: s.city, slug: s.citySlug, count: stateStores.filter((x) => x.citySlug === s.citySlug).length }])).values()].sort((a, b) => a.city.localeCompare(b.city));
 ---
-<Layout title={`Bin Stores in ${stateName} - Bin Stores USA`} description={`A links directory of bin stores in ${stateName}. Browse bin stores by city, with store names, addresses, and links to public listings.`}>
+<Layout title={`Bin Stores in ${stateName} - Bin Stores USA`} description={`A links directory of bin stores in ${stateName}. Browse bin stores by city, with store names and addresses${stateStores.some((s) => s.link) ? ", and links to public listings" : ""}.`}>
   <p><a href="/">Home</a></p>
   <h1>Bin Stores in {stateName}</h1>
   <p class="lead">{stateStores.length} bin stores listed in {stateName}, across {cities.length} {cities.length === 1 ? "city" : "cities"}. Pick a city to see the stores listed there.</p>
@@ -33,5 +33,5 @@ const cities = [...new Map(stateStores.map((s) => [s.citySlug, { city: s.city, s
     </div>
   ))}
   <h2>How bin stores work in {stateName}</h2>
-  <p>Bin stores sell returned goods and overstock from big retailers, from large bins, at one flat price per item that usually drops day by day through the week. Each store buys its own loads, sets its own restock day, and posts its own prices and hours on its own page, which is why this directory links to the store rather than printing details that change. The <a href="/guide/">guide to how bin stores work</a> explains the model in full, including why so many of these shops are called Amazon bin stores.</p>
+  <p>Bin stores sell returned goods and overstock from big retailers, from large bins, at one flat price per item that usually drops day by day through the week. Each store buys its own loads, sets its own restock day, and posts its own prices and hours on its own page. Where a store has a working public page, this directory links to it rather than printing details that change. The <a href="/guide/">guide to how bin stores work</a> explains the model in full, including why so many of these shops are called Amazon bin stores.</p>
 </Layout>
