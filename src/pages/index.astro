@@ -5,9 +5,9 @@ import stores from "../data/stores.json";
 const states = [...new Map(stores.map((s) => [s.stateSlug, { name: s.state, slug: s.stateSlug }])).values()].sort((a, b) => a.name.localeCompare(b.name));
 const cities = [...new Map(stores.map((s) => [`${s.stateSlug}/${s.citySlug}`, { city: s.city, citySlug: s.citySlug, state: s.state, stateAbbr: s.stateAbbr, stateSlug: s.stateSlug, count: stores.filter((x) => x.citySlug === s.citySlug && x.stateSlug === s.stateSlug).length }])).values()].sort((a, b) => a.city.localeCompare(b.city));
 ---
-<Layout title="Bin Stores Near Me - Bin Stores USA" description="A links directory of bin stores across the United States. Find bin stores by city and state, with store names, addresses, and links to public listings.">
+<Layout title="Bin Stores Near Me - Bin Stores USA" description="A links directory of bin stores across the United States. Find bin stores by city and state, with store names, addresses, and links to public listings where a working page exists.">
   <h1>Bin Stores Near Me</h1>
-  <p class="lead">A bin store is a shop that sells returned goods and overstock from big retailers. The goods sit in large bins, and the price per item often drops day by day through the week. This site lists bin stores across the United States, with a name, an address, and a link to a public listing for each store.</p>
+  <p class="lead">A bin store is a shop that sells returned goods and overstock from big retailers. The goods sit in large bins, and the price per item often drops day by day through the week. This site lists bin stores across the United States, with a name and an address for each store, and a link to a public listing where a working one exists.</p>
   <p class="note">This site lists links only. It gives no shopping advice and it does not rate, check, or vouch for any store. Hours and prices change often, so check the store's own page before you go.</p>
   <h2>Browse bin stores by city</h2>
   <ul class="grid">
@@ -22,7 +22,7 @@ const cities = [...new Map(stores.map((s) => [`${s.stateSlug}/${s.citySlug}`, { 
     ))}
   </ul>
   <h2>What is a bin store?</h2>
-  <p>Bin stores buy pallets of returned goods, overstock, and shelf pulls from large retailers, then sell the items from bins in a warehouse style shop. Each item in a bin usually has one flat price for that day, and the price often falls as the week goes on. New goods arrive on restock days, so the stock in the bins changes from week to week. This site does not list prices or restock days, because they change often. Use the link on each listing to see the store's own page.</p>
+  <p>Bin stores buy pallets of returned goods, overstock, and shelf pulls from large retailers, then sell the items from bins in a warehouse style shop. Each item in a bin usually has one flat price for that day, and the price often falls as the week goes on. New goods arrive on restock days, so the stock in the bins changes from week to week. This site does not list prices or restock days, because they change often. Where a listing has a link, it leads to the store's own page.</p>
   <h2>How the weekly price drop works</h2>
   <p>Most bin stores run on a weekly cycle. On restock day the bins are refilled and every item carries the week's highest flat price. Day by day the price steps down, so the end of the week is the cheapest time to buy and also the most picked over. Early in the week there is more choice at a higher price; late in the week there is less choice at the lowest price. Neither end is better for everyone, they are different kinds of hunt. The <a href="/guide/">guide to how bin stores work</a> explains the cycle, where the goods come from, and why so many of these shops are called Amazon bin stores.</p>
   <h2>Questions people ask about bin stores</h2>
@@ -33,5 +33,5 @@ const cities = [...new Map(stores.map((s) => [`${s.stateSlug}/${s.citySlug}`, { 
   <h3>Are the goods new?</h3>
   <p>Some are, some are not. A load can hold unopened items next to opened, incomplete, or broken ones, and most stores do not test what they sell. Goods are usually sold as they are, and many sales are final. The low prices exist because the store has not checked or guaranteed the goods.</p>
   <h3>Why does this site not list prices or hours?</h3>
-  <p>Because they change too often to print honestly. A price printed here could be wrong by the weekend. Each listing links to the store's own public page, which is where its current hours, restock day, and prices live.</p>
+  <p>Because they change too often to print honestly. A price printed here could be wrong by the weekend. Where a listing has a link, it leads to the store's own public page, which is where its current hours, restock day, and prices live.</p>
 </Layout>
