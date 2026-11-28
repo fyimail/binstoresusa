@@ -28,7 +28,7 @@ const cities = [...new Map(stateStores.map((s) => [s.citySlug, { city: s.city, s
     <div class="store">
       <h3>{s.name}</h3>
       <p>{s.address}</p>
-      <p><a href={s.link} rel="nofollow">View public listing</a></p>
+      {s.link && <p><a href={s.link} rel="nofollow">View public listing</a></p>}
       <p class="meta">Source: {s.source}, checked {s.checked}</p>
     </div>
   ))}

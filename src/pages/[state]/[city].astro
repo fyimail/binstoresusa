@@ -24,11 +24,11 @@ const metroNote = cityName === "Dallas" ? "Stores listed here are in Dallas and 
     <div class="store">
       <h2>{s.name}</h2>
       <p>{s.address}</p>
-      <p><a href={s.link} rel="nofollow">View public listing</a></p>
+      {s.link && <p><a href={s.link} rel="nofollow">View public listing</a></p>}
       <p class="meta">Source: {s.source}, checked {s.checked}</p>
     </div>
   ))}
-  <p class="note">Hours and prices change often and are not listed here. Check the store's own page through the link above before you go.</p>
+  {cityStores.some((s) => s.link) && <p class="note">Hours and prices change often and are not listed here. Check the store's own page through the link above before you go.</p>}
   {content && <h2>Bin stores in {cityName}, explained</h2>}
   {content && <p>{content.local}</p>}
   {faq && <h2>Common questions about bin stores in {cityName}</h2>}
